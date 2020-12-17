@@ -1,42 +1,48 @@
 package com.example.pruebatecnica.models.home;
 
-import android.content.Context;
-import android.util.Log;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-
 public class HomeModel {
-    static RequestQueue requestQueueq;
-    private static final String urlPosts = "https://jsonplaceholder.typicode.com/posts";
-    static JSONArray respuesta;
-    public static void jsonArrayRequest(Context c){
 
-        requestQueueq = Volley.newRequestQueue(c);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                urlPosts,
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        respuesta = response;
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
+    private int userId;
+    private int id;
+    private String title;
+    private String body;
 
-                    }
-                }
-        );
+    public HomeModel(int userId, int id, String title, String body){
+        this.userId = userId;
+        this.id=id;
+        this.title=title;
+        this.body=body;
+    }
 
-        requestQueueq.add(jsonArrayRequest);
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 }
