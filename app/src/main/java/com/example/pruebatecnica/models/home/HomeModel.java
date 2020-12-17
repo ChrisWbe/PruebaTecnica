@@ -1,5 +1,8 @@
 package com.example.pruebatecnica.models.home;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class HomeModel {
 
     private int userId;
@@ -13,12 +16,69 @@ public class HomeModel {
     private String website;
     private int imgResource;
 
-    public HomeModel(int userId, int id, String title, String body, int imgResource){
+    public HomeModel(int userId, int id, String title, String body, String name, String username, String email, String phone, String website, int imgResource){
         this.userId = userId;
         this.id=id;
         this.title=title;
         this.body=body;
+        this.name=name;
+        this.username=username;
+        this.email=email;
+        this.phone=phone;
+        this.website=website;
         this.imgResource=imgResource;
+    }
+
+    public HomeModel(JSONObject item) throws JSONException {
+        this.userId=item.getInt("userId");
+        this.id=item.getInt("id");
+        this.title=item.getString("title");
+        this.body=item.getString("body");
+        this.name=item.getString("name");
+        this.username=item.getString("username");
+        this.email=item.getString("email");
+        this.phone=item.getString("phone");
+        this.website=item.getString("website");
+        this.imgResource=item.getInt("imgResource");
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public int getUserId() {
@@ -59,5 +119,20 @@ public class HomeModel {
 
     public void setImgResource(int imgResource) {
         this.imgResource = imgResource;
+    }
+
+    public JSONObject getObject() throws JSONException {
+        JSONObject item = new JSONObject();
+        item.put("userId",this.userId);
+        item.put("id",this.id);
+        item.put("title",this.title);
+        item.put("body",this.body);
+        item.put("name",this.name);
+        item.put("username",this.username);
+        item.put("email",this.email);
+        item.put("phone",this.phone);
+        item.put("website",this.website);
+        item.put("imgResource", this.imgResource);
+        return item;
     }
 }

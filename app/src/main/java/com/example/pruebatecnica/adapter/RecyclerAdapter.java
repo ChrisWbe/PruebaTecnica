@@ -34,9 +34,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
         HomeModel item = items.get(position);
-        holder.imgItem.setImageResource(item.getImgResource());
+        holder.tvId.setText(String.valueOf(item.getId()));
         holder.tvTitle.setText(item.getTitle());
         holder.tvBody.setText(item.getBody());
+        holder.imgItem.setImageResource(item.getImgResource());
     }
 
     @Override
@@ -55,6 +56,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     public static class RecyclerHolder extends RecyclerView.ViewHolder{
         private ImageView imgItem;
+        private TextView tvId;
         private TextView tvTitle;
         private TextView tvBody;
 
@@ -62,6 +64,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         public RecyclerHolder(@NonNull View itemView) {
             super(itemView);
             imgItem = itemView.findViewById(R.id.imgItem);
+            tvId = itemView.findViewById(R.id.tvId);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvBody = itemView.findViewById(R.id.tvBody);
         }

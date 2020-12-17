@@ -1,5 +1,6 @@
 package com.example.pruebatecnica.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,10 +17,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pruebatecnica.DialogActivity;
 import com.example.pruebatecnica.R;
 import com.example.pruebatecnica.adapter.RecyclerAdapter;
 import com.example.pruebatecnica.models.home.HomeModel;
 import com.example.pruebatecnica.R;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,13 +55,28 @@ public class HomeFragment extends Fragment {
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Seleccion: "+items.get(rvLista.getChildAdapterPosition(v)).getId(), Toast.LENGTH_LONG).show();
+                HomeModel item = items.get(rvLista.getChildAdapterPosition(v));
+                Intent intent = new Intent(getContext(), DialogActivity.class);
+                Bundle parametros = new Bundle();
+                try {
+                    Log.d("MVVM", item.getObject().toString());
+                    parametros.putString("item", item.getObject().toString());
+                    intent.putExtras(parametros);
+                    startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
 
 
         return root;
+    }
+
+    public void openDialog(){
+
     }
 
     private void initViews(View view){
@@ -69,10 +88,10 @@ public class HomeFragment extends Fragment {
         rvLista.setLayoutManager(manager);
 
         items = new ArrayList<>();
-        items.add(new HomeModel(1, 1, "title", "body", R.drawable.user));
-        items.add(new HomeModel(2, 2, "title", "body", R.drawable.user));
-        items.add(new HomeModel(2, 3, "title", "body", R.drawable.user));
-        items.add(new HomeModel(3, 4, "title", "body", R.drawable.user));
+        items.add(new HomeModel(1, 1, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
+        items.add(new HomeModel(1, 2, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
+        items.add(new HomeModel(1, 3, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
+        items.add(new HomeModel(1, 4, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
         adapter = new RecyclerAdapter(items);
         rvLista.setAdapter(adapter);
     }
