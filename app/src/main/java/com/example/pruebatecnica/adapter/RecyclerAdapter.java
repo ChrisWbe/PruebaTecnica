@@ -15,8 +15,9 @@ import com.example.pruebatecnica.models.home.HomeModel;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> implements View.OnClickListener {
     private List<HomeModel> items;
+    private View.OnClickListener listener;
 
     public RecyclerAdapter(List<HomeModel> items) {
         this.items = items;
@@ -26,12 +27,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item_list_view, parent, false);
+        view.setOnClickListener(this);
         return new RecyclerHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
         HomeModel item = items.get(position);
+        holder.imgItem.setImageResource(item.getImgResource());
         holder.tvTitle.setText(item.getTitle());
         holder.tvBody.setText(item.getBody());
     }
@@ -41,15 +44,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         return items.size();
     }
 
+    public void setOnClickListener(View.OnClickListener listener){this.listener=listener;}
+
+    @Override
+    public void onClick(View v) {
+        if(listener!=null){
+            listener.onClick(v);
+        }
+    }
+
     public static class RecyclerHolder extends RecyclerView.ViewHolder{
-        private ImageView imItem;
+        private ImageView imgItem;
         private TextView tvTitle;
         private TextView tvBody;
 
 
         public RecyclerHolder(@NonNull View itemView) {
             super(itemView);
-            //imItem = itemView.findViewById(R.id.imgItem);
+            imgItem = itemView.findViewById(R.id.imgItem);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvBody = itemView.findViewById(R.id.tvBody);
         }

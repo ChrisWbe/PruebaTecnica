@@ -6,12 +6,19 @@ public class HomeModel {
     private int id;
     private String title;
     private String body;
+    private String name;
+    private String username;
+    private String email;
+    private String phone;
+    private String website;
+    private int imgResource;
 
-    public HomeModel(int userId, int id, String title, String body){
+    public HomeModel(int userId, int id, String title, String body, int imgResource){
         this.userId = userId;
         this.id=id;
         this.title=title;
         this.body=body;
+        this.imgResource=imgResource;
     }
 
     public int getUserId() {
@@ -44,5 +51,13 @@ public class HomeModel {
 
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public int getImgResource() {
+        return imgResource;
+    }
+
+    public void setImgResource(int imgResource) {
+        this.imgResource = imgResource;
     }
 }

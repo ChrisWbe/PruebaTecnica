@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,6 +48,13 @@ public class HomeFragment extends Fragment {
         initViews(root);
         initValues();
 
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Seleccion: "+items.get(rvLista.getChildAdapterPosition(v)).getId(), Toast.LENGTH_LONG).show();
+            }
+        });
+
 
 
         return root;
@@ -61,11 +69,10 @@ public class HomeFragment extends Fragment {
         rvLista.setLayoutManager(manager);
 
         items = new ArrayList<>();
-        items.add(new HomeModel(1, 1, "title", "body"));
-        items.add(new HomeModel(1, 1, "title", "body"));
-        items.add(new HomeModel(1, 1, "title", "body"));
-        items.add(new HomeModel(1, 1, "title", "body"));
-
+        items.add(new HomeModel(1, 1, "title", "body", R.drawable.user));
+        items.add(new HomeModel(2, 2, "title", "body", R.drawable.user));
+        items.add(new HomeModel(2, 3, "title", "body", R.drawable.user));
+        items.add(new HomeModel(3, 4, "title", "body", R.drawable.user));
         adapter = new RecyclerAdapter(items);
         rvLista.setAdapter(adapter);
     }

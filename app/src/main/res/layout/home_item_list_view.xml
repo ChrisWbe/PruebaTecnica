@@ -11,13 +11,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="10dp">
-        <!--<ImageView
+        <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:id="@+id/imgItem"
-            android:src="@drawable/ic_launcher_foreground"
             android:scaleType="centerCrop"
-            android:layout_marginRight="10dp"/>-->
+            android:layout_marginRight="10dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

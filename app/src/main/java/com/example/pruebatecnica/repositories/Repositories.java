@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pruebatecnica.R;
 import com.example.pruebatecnica.models.home.HomeModel;
 
 import org.json.JSONArray;
@@ -50,7 +51,7 @@ public class Repositories {
         return data;
     }
     private void setHomeModel(){
-        dataSet.add(new HomeModel(1, 1, "title", "body"));
+        dataSet.add(new HomeModel(1, 1, "title", "body", R.drawable.user));
     }
     public static void jsonArrayRequest(){
 
@@ -66,7 +67,7 @@ public class Repositories {
                         for(int i=0;i<size;i++){
                             try {
                                 JSONObject jsonObject = new JSONObject(response.get(i).toString());
-                                dataSet.add(new HomeModel(jsonObject.getInt("userId"), jsonObject.getInt("id"), jsonObject.getString("title"), jsonObject.getString("body")));
+                                dataSet.add(new HomeModel(jsonObject.getInt("userId"), jsonObject.getInt("id"), jsonObject.getString("title"), jsonObject.getString("body"), R.drawable.user));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
