@@ -43,7 +43,8 @@ public class Repositories {
     }
 
     public MutableLiveData<List<HomeModel>> getHomeModel(){
-        jsonArrayRequest();
+        //jsonArrayRequest();
+        setHomeModel();
         MutableLiveData<List<HomeModel>> data = new MutableLiveData<>();
         data.setValue(dataSet);
         return data;
