@@ -24,6 +24,8 @@ import com.example.pruebatecnica.R;
 import com.example.pruebatecnica.adapter.RecyclerAdapter;
 import com.example.pruebatecnica.models.home.HomeModel;
 import com.example.pruebatecnica.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 
@@ -36,24 +38,22 @@ public class HomeFragment extends Fragment {
     private RecyclerAdapter adapter;
     private List<HomeModel> items;
     private HomeViewModel homeViewModel;
+    private FloatingActionButton fab;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         homeViewModel.init(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
+        initViews(root);
+        initValues();
 
         homeViewModel.getHomeModel().observe(getViewLifecycleOwner(), new Observer<List<HomeModel>>() {
             @Override
             public void onChanged(List<HomeModel> homeModels) {
                 Log.d("MVVM", String.valueOf(homeModels.size()));
-
                 adapter.notifyDataSetChanged();
             }
         });
-
-        initViews(root);
-        initValues();
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,12 +73,23 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Actualización de los post
+                adapter.notifyDataSetChanged();
+                Snackbar.make(view, "Desde Fragment", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            }
+        });
+
         return root;
     }
 
 
     private void initViews(View view){
         rvLista = (RecyclerView) view.findViewById(R.id.rvLista);
+        fab = getActivity().findViewById(R.id.fab);
+        fab.setImageResource(R.drawable.refresh);
     }
 
     private void initValues(){

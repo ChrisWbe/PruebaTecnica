@@ -49,6 +49,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         holder.imgStar.setImageResource(
                 sharedPreferenceManager.obtenerFavShared(String.valueOf(item.getId())) ? android.R.drawable.star_big_off : android.R.drawable.star_big_on
         );
+
+        if(item.getId()<=2){
+            holder.imgIndicator.setImageResource(R.drawable.ic_circle_indicator);
+        }
     }
 
     @Override
@@ -71,6 +75,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         private TextView tvTitle;
         private TextView tvBody;
         private ImageView imgStar;
+        private ImageView imgIndicator;
 
 
 
@@ -81,6 +86,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvBody = itemView.findViewById(R.id.tvBody);
             imgStar = itemView.findViewById(R.id.imgStar);
+            imgIndicator = itemView.findViewById(R.id.imgIndicator);
 
         }
     }
