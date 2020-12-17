@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
         homeViewModel.init(getContext());
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
+
         homeViewModel.getHomeModel().observe(getViewLifecycleOwner(), new Observer<List<HomeModel>>() {
             @Override
             public void onChanged(List<HomeModel> homeModels) {
@@ -70,14 +72,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
-
         return root;
     }
 
-    public void openDialog(){
-
-    }
 
     private void initViews(View view){
         rvLista = (RecyclerView) view.findViewById(R.id.rvLista);
@@ -92,7 +89,7 @@ public class HomeFragment extends Fragment {
         items.add(new HomeModel(1, 2, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
         items.add(new HomeModel(1, 3, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
         items.add(new HomeModel(1, 4, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
-        adapter = new RecyclerAdapter(items);
+        adapter = new RecyclerAdapter(items, getContext());
         rvLista.setAdapter(adapter);
     }
 

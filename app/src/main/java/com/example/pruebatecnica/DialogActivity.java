@@ -2,27 +2,21 @@ package com.example.pruebatecnica;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.example.pruebatecnica.models.home.HomeModel;
+import com.example.pruebatecnica.repositories.SharedPreferenceManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class DialogActivity extends AppCompatActivity {
     HomeModel item;
-    SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
 
     TextView userId;
     TextView id;
@@ -32,13 +26,15 @@ public class DialogActivity extends AppCompatActivity {
     TextView phone;
     TextView website;
     Button btnFav;
+
+    SharedPreferenceManager sharedPreferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog);
-        sharedPreferences = this.getSharedPreferences(getString(R.string.preference_file_fav), Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+
         Bundle parametros = this.getIntent().getExtras();
+        sharedPreferenceManager = new SharedPreferenceManager(this);
 
         try {
             item = new HomeModel(new JSONObject(parametros.getString("item")));
@@ -49,14 +45,13 @@ public class DialogActivity extends AppCompatActivity {
 
         initViews();
 
-        btnFav.setEnabled(obtenerFavShared());
+        btnFav.setEnabled(sharedPreferenceManager.obtenerFavShared(String.valueOf(item.getId())));
 
         btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String itemId = String.valueOf(item.getId());
-                editor.putString(itemId, itemId);
-                editor.apply();
+                sharedPreferenceManager.saveCV(itemId);
                 btnFav.setEnabled(false);
             }
         });
@@ -64,11 +59,7 @@ public class DialogActivity extends AppCompatActivity {
 
     }
 
-    public boolean obtenerFavShared(){
-        String listString = sharedPreferences.getString(String.valueOf(item.getId()),"null");
-        Log.d("MVVM", listString);
-        return listString=="null";
-    }
+
 
     public void initViews(){
 
