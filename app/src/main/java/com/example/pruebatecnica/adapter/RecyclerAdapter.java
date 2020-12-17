@@ -20,8 +20,9 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> implements View.OnClickListener {
     private List<HomeModel> items;
     private View.OnClickListener listener;
-    SharedPreferenceManager sharedPreferenceManager;
-    Context c;
+    private SharedPreferenceManager sharedPreferenceManager;
+    private Context c;
+    private final int nFirts = 20;
 
     public RecyclerAdapter(List<HomeModel> items,Context c) {
         this.items = items;
@@ -50,7 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                 sharedPreferenceManager.obtenerFavShared(String.valueOf(item.getId())) ? android.R.drawable.star_big_off : android.R.drawable.star_big_on
         );
 
-        if(item.getId()<=2){
+        if(item.getId()<=nFirts){
             holder.imgIndicator.setImageResource(R.drawable.ic_circle_indicator);
         }
     }

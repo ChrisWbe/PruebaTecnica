@@ -69,6 +69,10 @@ public class HomeFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                //Se obtiene la vista y se cambia el indicador
+                ImageView imgIndicator = (ImageView) v.findViewById(R.id.imgIndicator);
+                imgIndicator.setImageResource(android.R.drawable.checkbox_on_background);
+
 
             }
         });
@@ -122,7 +126,7 @@ public class HomeFragment extends Fragment {
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             Toast.makeText(getContext(), String.valueOf(viewHolder.getAdapterPosition()), Toast.LENGTH_LONG).show();
             items.remove(viewHolder.getAdapterPosition());
-            adapter.notifyDataSetChanged();
+            //adapter.notifyDataSetChanged();
         }
     };
 
