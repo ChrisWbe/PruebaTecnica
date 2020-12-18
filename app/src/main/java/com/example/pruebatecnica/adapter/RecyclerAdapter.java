@@ -1,7 +1,6 @@
 package com.example.pruebatecnica.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pruebatecnica.R;
-import com.example.pruebatecnica.models.home.HomeModel;
+import com.example.pruebatecnica.models.post.PostsModel;
 import com.example.pruebatecnica.repositories.SharedPreferenceManager;
 
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RecyclerHolder> implements View.OnClickListener {
-    private List<HomeModel> items;
+    private List<PostsModel> items;
     private View.OnClickListener listener;
     private SharedPreferenceManager sharedPreferenceManager;
     private Context c;
     private final int nFirts = 20;
 
-    public RecyclerAdapter(List<HomeModel> items,Context c) {
+    public RecyclerAdapter(List<PostsModel> items, Context c) {
         this.items = items;
         this.c=c;
     }
@@ -40,7 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
-        HomeModel item = items.get(position);
+        PostsModel item = items.get(position);
         holder.tvId.setText(String.valueOf(item.getId()));
         holder.tvTitle.setText(item.getTitle());
         holder.tvBody.setText(item.getBody());

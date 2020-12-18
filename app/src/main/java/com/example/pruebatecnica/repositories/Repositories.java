@@ -1,7 +1,6 @@
 package com.example.pruebatecnica.repositories;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -11,8 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.pruebatecnica.R;
-import com.example.pruebatecnica.models.home.HomeModel;
+import com.example.pruebatecnica.models.post.PostsModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +24,7 @@ public class Repositories {
     static RequestQueue requestQueueq;
     private static final String urlPosts = "https://jsonplaceholder.typicode.com/posts";
     private static Repositories instance;
-    private static ArrayList<HomeModel> dataSet = new ArrayList<>();
+    private static ArrayList<PostsModel> dataSet = new ArrayList<>();
 
     public static Context getC() {
         return c;
@@ -43,10 +41,10 @@ public class Repositories {
         return instance;
     }
 
-    public MutableLiveData<List<HomeModel>> getHomeModel(){
+    public MutableLiveData<List<PostsModel>> getHomeModel(){
         //jsonArrayRequest();
         setHomeModel();
-        MutableLiveData<List<HomeModel>> data = new MutableLiveData<>();
+        MutableLiveData<List<PostsModel>> data = new MutableLiveData<>();
         data.setValue(dataSet);
         return data;
     }

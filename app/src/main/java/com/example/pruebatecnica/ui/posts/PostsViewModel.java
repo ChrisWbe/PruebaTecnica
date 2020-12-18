@@ -1,22 +1,21 @@
-package com.example.pruebatecnica.ui.home;
+package com.example.pruebatecnica.ui.posts;
 
 import android.content.Context;
-import android.util.Log;
 
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.pruebatecnica.models.home.HomeModel;
+import com.example.pruebatecnica.models.post.PostsModel;
 import com.example.pruebatecnica.repositories.Repositories;
 
 import java.util.List;
 
-public class HomeViewModel extends ViewModel {
+public class PostsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
-    private MutableLiveData<List<HomeModel>> mHomeModel;
+    private MutableLiveData<List<PostsModel>> mHomeModel;
     private Repositories mRepo;
 
     public void init(Context c){
@@ -28,11 +27,11 @@ public class HomeViewModel extends ViewModel {
         mHomeModel = mRepo.getHomeModel();
     }
 
-    public LiveData<List<HomeModel>> getHomeModel(){
+    public LiveData<List<PostsModel>> getHomeModel(){
         return mHomeModel;
     }
 
-    public HomeViewModel() {
+    public PostsViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is home fragment");
     }

@@ -1,4 +1,4 @@
-package com.example.pruebatecnica.ui.home;
+package com.example.pruebatecnica.ui.posts;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,8 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pruebatecnica.DialogActivity;
 import com.example.pruebatecnica.R;
 import com.example.pruebatecnica.adapter.RecyclerAdapter;
-import com.example.pruebatecnica.models.home.HomeModel;
-import com.example.pruebatecnica.R;
+import com.example.pruebatecnica.models.post.PostsModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -36,24 +34,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class PostsFragment extends Fragment {
     private RecyclerView rvLista;
     private RecyclerAdapter adapter;
-    private List<HomeModel> items;
-    private HomeViewModel homeViewModel;
+    private List<PostsModel> items;
+    private PostsViewModel postsViewModel;
     private FloatingActionButton fab;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
-        homeViewModel.init(getContext());
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        postsViewModel = new ViewModelProvider(this).get(PostsViewModel.class);
+        postsViewModel.init(getContext());
+        View root = inflater.inflate(R.layout.fragment_posts, container, false);
         initViews(root);
         initValues();
 
-        homeViewModel.getHomeModel().observe(getViewLifecycleOwner(), new Observer<List<HomeModel>>() {
+        postsViewModel.getHomeModel().observe(getViewLifecycleOwner(), new Observer<List<PostsModel>>() {
             @Override
-            public void onChanged(List<HomeModel> homeModels) {
-                Log.d("MVVM", String.valueOf(homeModels.size()));
+            public void onChanged(List<PostsModel> postsModels) {
+                Log.d("MVVM", String.valueOf(postsModels.size()));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -61,7 +59,7 @@ public class HomeFragment extends Fragment {
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeModel item = items.get(rvLista.getChildAdapterPosition(v));
+                PostsModel item = items.get(rvLista.getChildAdapterPosition(v));
                 Intent intent = new Intent(getContext(), DialogActivity.class);
                 Bundle parametros = new Bundle();
                 try {
@@ -95,8 +93,8 @@ public class HomeFragment extends Fragment {
 
     private void initViews(View view){
         rvLista = (RecyclerView) view.findViewById(R.id.rvLista);
-        fab = getActivity().findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.refresh);
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        //fab.setImageResource(R.drawable.refresh);
     }
 
     private void initValues(){
@@ -104,10 +102,10 @@ public class HomeFragment extends Fragment {
         rvLista.setLayoutManager(manager);
 
         items = new ArrayList<>();
-        items.add(new HomeModel(1, 1, "title", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
-        items.add(new HomeModel(1, 2, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
-        items.add(new HomeModel(1, 3, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
-        items.add(new HomeModel(1, 4, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
+        items.add(new PostsModel(1, 1, "title", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
+        items.add(new PostsModel(1, 2, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
+        items.add(new PostsModel(1, 3, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
+        items.add(new PostsModel(1, 4, "title", "body", "Christian","chriswbe","chriswbe1993@gmail.com","123456789","google.com",R.drawable.user));
         adapter = new RecyclerAdapter(items, getContext());
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(rvLista);
         rvLista.setAdapter(adapter);

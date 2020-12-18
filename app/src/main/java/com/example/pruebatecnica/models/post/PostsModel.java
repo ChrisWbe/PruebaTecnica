@@ -1,9 +1,9 @@
-package com.example.pruebatecnica.models.home;
+package com.example.pruebatecnica.models.post;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class HomeModel {
+public class PostsModel {
 
     private int userId;
     private int id;
@@ -16,7 +16,7 @@ public class HomeModel {
     private String website;
     private int imgResource;
 
-    public HomeModel(int userId, int id, String title, String body, String name, String username, String email, String phone, String website, int imgResource){
+    public PostsModel(int userId, int id, String title, String body, String name, String username, String email, String phone, String website, int imgResource){
         this.userId = userId;
         this.id=id;
         this.title=title;
@@ -29,7 +29,7 @@ public class HomeModel {
         this.imgResource=imgResource;
     }
 
-    public HomeModel(JSONObject item) throws JSONException {
+    public PostsModel(JSONObject item) throws JSONException {
         this.userId=item.getInt("userId");
         this.id=item.getInt("id");
         this.title=item.getString("title");

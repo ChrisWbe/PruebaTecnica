@@ -4,11 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.example.pruebatecnica.models.home.HomeModel;
+import com.example.pruebatecnica.models.post.PostsModel;
 import com.example.pruebatecnica.repositories.SharedPreferenceManager;
 
 import org.json.JSONException;
@@ -16,7 +15,7 @@ import org.json.JSONObject;
 
 
 public class DialogActivity extends AppCompatActivity {
-    HomeModel item;
+    PostsModel item;
 
     TextView userId;
     TextView id;
@@ -37,7 +36,7 @@ public class DialogActivity extends AppCompatActivity {
         sharedPreferenceManager = new SharedPreferenceManager(this);
 
         try {
-            item = new HomeModel(new JSONObject(parametros.getString("item")));
+            item = new PostsModel(new JSONObject(parametros.getString("item")));
 
         } catch (JSONException e) {
             e.printStackTrace();
