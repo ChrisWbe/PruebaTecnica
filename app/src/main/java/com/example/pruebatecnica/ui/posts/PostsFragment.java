@@ -64,7 +64,7 @@ public class PostsFragment extends Fragment {
             public void onClick(View view) {
                 //Actualización de los post
                 try {
-                    postsViewModel.update();
+                    postsViewModel.update(getContext());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

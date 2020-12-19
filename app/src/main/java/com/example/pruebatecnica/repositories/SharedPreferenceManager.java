@@ -28,4 +28,9 @@ public class SharedPreferenceManager {
         editor.putString(itemId, itemId);
         editor.apply();
     }
+
+    public void deleteFilePre() {
+        editor.clear();
+        editor.apply();
+    }
 }

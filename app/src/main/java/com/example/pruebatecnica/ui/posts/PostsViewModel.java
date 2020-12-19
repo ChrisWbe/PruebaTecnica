@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.pruebatecnica.R;
 import com.example.pruebatecnica.models.post.PostsModel;
 import com.example.pruebatecnica.repositories.Repositories;
+import com.example.pruebatecnica.repositories.SharedPreferenceManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +36,9 @@ public class PostsViewModel extends ViewModel {
     }
 
 
-    public void update() throws JSONException {
+    public void update(Context c) throws JSONException {
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(c);
+        sharedPreferenceManager.deleteFilePre();
         mPostModel.getValue().clear();
         mPostModel = mRepo.updatePostsModels();
     }
