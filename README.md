@@ -12,7 +12,7 @@ Crear una aplicación que liste todos los mensajes y el detalle de cada uno de e
 8. Cada celda debe tener la funcionalidad de SWIPE y borrar el post ó puedes hacerlo haciendo uso de Bottom sheets, tú decides. ✔️
 9. Añade un botón en el footer para remover todos los posts ó una acción de menú en el toolbar. ✔️
 10. Añade un botón para refrescar todos los posts. ✔️
-11. Añade un Fragment para filtrar los favoritos (All/ Favorites).
+11. Añade un Fragment para filtrar los favoritos (All/ Favorites). ✔️
 12. Los posts favoritos deben tener un indicador de estrella. ✔️
 
 ## Construido con 🛠️
@@ -23,6 +23,8 @@ Crear una aplicación que liste todos los mensajes y el detalle de cada uno de e
 - RecyclerView
 - CardView
 - JSON API
+- SharedPreference
+- ConstraintLayout
 
 ## Detalles Técnicos
 - Android 4.1 en adelante
