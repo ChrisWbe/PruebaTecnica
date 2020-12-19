@@ -1,6 +1,7 @@
 package com.example.pruebatecnica.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,9 +51,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
                 sharedPreferenceManager.obtenerFavShared(String.valueOf(item.getId())) ? android.R.drawable.star_big_off : android.R.drawable.star_big_on
         );
 
-        if(item.getId()<=nFirts){
-            holder.imgIndicator.setImageResource(R.drawable.ic_circle_indicator);
-        }
+        holder.imgIndicator.setImageResource(
+                item.getId()<=nFirts?R.drawable.ic_circle_indicator:R.drawable.ic_circle_not_indicator
+        );
+
     }
 
     @Override
