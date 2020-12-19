@@ -49,7 +49,6 @@ public class Repositories {
     }
 
     public MutableLiveData<List<PostsModel>> getPostModels(){
-        //dataSet.clear();
         requestQueueq = Volley.newRequestQueue(c);
         jsonArrayRequestPosts();
         data.setValue(dataSet);
@@ -155,7 +154,7 @@ public class Repositories {
 
             }
         }
-
+        dataSet.clear();
         dataSet.addAll(pm);
 
     }
