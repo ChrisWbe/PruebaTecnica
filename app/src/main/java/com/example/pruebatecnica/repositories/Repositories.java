@@ -32,7 +32,8 @@ public class Repositories {
     private static JSONArray jsonArrayPosts = new JSONArray();
     private static JSONArray jsonArrayUsers = new JSONArray();
     private MutableLiveData<List<PostsModel>> data = new MutableLiveData<>();
-    private ArrayList<PostsModel> dataSet = new ArrayList<>();
+    private MutableLiveData<List<PostsModel>> dataFav = new MutableLiveData<>();
+    private static ArrayList<PostsModel> dataSet = new ArrayList<>();
 
 
     public Repositories(Context c){
@@ -48,11 +49,23 @@ public class Repositories {
     }
 
     public MutableLiveData<List<PostsModel>> getPostModels(){
-        //dataSet.clear();
         requestQueueq = Volley.newRequestQueue(c);
         jsonArrayRequestPosts();
         data.setValue(dataSet);
         return data;
+    }
+
+    public MutableLiveData<List<PostsModel>> getPostFav(){
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(c);
+        ArrayList<PostsModel> listFav = new ArrayList<>();
+        for(int i=0; i<dataSet.size();i++){
+            String idItems = String.valueOf(dataSet.get(i).getId());
+            if(!sharedPreferenceManager.obtenerFavShared(idItems)){
+                listFav.add(dataSet.get(i));
+            }
+        }
+        dataFav.setValue(listFav);
+        return dataFav;
     }
 
     public MutableLiveData<List<PostsModel>> updatePostsModels() throws JSONException {
@@ -141,7 +154,7 @@ public class Repositories {
 
             }
         }
-
+        dataSet.clear();
         dataSet.addAll(pm);
 
     }

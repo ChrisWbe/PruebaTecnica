@@ -19,9 +19,7 @@ public class SharedPreferenceManager {
     }
 
     public boolean obtenerFavShared(String id){
-        String listString = sharedPreferences.getString(id,"null");
-        Log.d("MVVM", listString);
-        return listString=="null";
+        return sharedPreferences.getString(id,"null")=="null";
     }
 
     public void saveCV(String itemId){
