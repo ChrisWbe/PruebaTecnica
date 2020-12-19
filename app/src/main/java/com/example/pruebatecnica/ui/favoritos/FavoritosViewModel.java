@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.pruebatecnica.models.post.PostsModel;
 import com.example.pruebatecnica.repositories.Repositories;
+import com.example.pruebatecnica.repositories.SharedPreferenceManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavoritosViewModel extends ViewModel {
@@ -21,10 +23,17 @@ public class FavoritosViewModel extends ViewModel {
             return;
         }
         mRepo = Repositories.getInstance(c);
-        mPostModel = mRepo.getPostModels();
+        mPostModel = mRepo.getPostFav();
+    }
+    public void deleteFav(Context c){
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(c);
+        sharedPreferenceManager.deleteFilePre();
+        mPostModel.getValue().clear();
     }
 
-    public LiveData<List<PostsModel>> getHomeModel(){
+
+
+    public LiveData<List<PostsModel>> getHomeModelFav(){
         return mPostModel;
     }
 

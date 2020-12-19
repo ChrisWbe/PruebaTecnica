@@ -1,6 +1,7 @@
 package com.example.pruebatecnica.ui.favoritos;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,9 +38,10 @@ public class FavoritosFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_favoritos, container, false);
         rvListaFav = (RecyclerView) root.findViewById(R.id.rvListaFav);
 
-        favoritosViewModel.getHomeModel().observe(getViewLifecycleOwner(), new Observer<List<PostsModel>>() {
+        favoritosViewModel.getHomeModelFav().observe(getViewLifecycleOwner(), new Observer<List<PostsModel>>() {
             @Override
             public void onChanged(List<PostsModel> postsModels) {
+                Log.d("Tamaño fav", String.valueOf(postsModels.size()));
                 adapterFav.notifyDataSetChanged();
             }
         });
@@ -48,7 +50,7 @@ public class FavoritosFragment extends Fragment {
     }
 
     public void initRecyclerView(){
-        adapterFav = new RecyclerAdapterFav(favoritosViewModel.getHomeModel().getValue(), getContext());
+        adapterFav = new RecyclerAdapterFav(favoritosViewModel.getHomeModelFav().getValue(), getContext());
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         rvListaFav.setLayoutManager(manager);
         rvListaFav.setAdapter(adapterFav);
@@ -65,6 +67,8 @@ public class FavoritosFragment extends Fragment {
         switch (item.getItemId()){
             case R.id.action_settings:
                 Toast.makeText(getContext(), "Favoritos Borrados", Toast.LENGTH_LONG).show();
+                favoritosViewModel.deleteFav(getContext());
+                adapterFav.notifyDataSetChanged();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
