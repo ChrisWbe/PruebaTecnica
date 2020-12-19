@@ -131,6 +131,7 @@ public class PostsFragment extends Fragment {
         switch (item.getItemId()){
             case R.id.action_delete:
                 Toast.makeText(getContext(), "Borrado", Toast.LENGTH_LONG).show();
+                postsViewModel.deletePreFav(getContext());
                 postsViewModel.getHomeModel().getValue().clear();
                 adapter.notifyDataSetChanged();
                 return true;

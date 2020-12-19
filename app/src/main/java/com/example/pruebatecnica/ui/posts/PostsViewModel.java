@@ -43,6 +43,11 @@ public class PostsViewModel extends ViewModel {
         mPostModel = mRepo.updatePostsModels();
     }
 
+    public void deletePreFav(Context c){
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(c);
+        sharedPreferenceManager.deleteFilePre();
+    }
+
     public LiveData<List<PostsModel>> getHomeModel(){
         return mPostModel;
     }
