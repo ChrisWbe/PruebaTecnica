@@ -71,12 +71,13 @@ public class DialogActivity extends AppCompatActivity {
         website = findViewById(R.id.tvWebsiteDialog);
         btnFav = findViewById(R.id.btnFavoritos);
 
-        userId.setText(String.valueOf(item.getUserId()));
-        id.setText(String.valueOf(item.getId()));
-        name.setText(item.getName());
-        username.setText(item.getUsername());
-        email.setText(item.getEmail());
-        phone.setText(item.getPhone());
-        website.setText(item.getWebsite());
+        userId.setText("ID User: "+String.valueOf(item.getUserId()));
+        id.setText("ID: "+String.valueOf(item.getId()));
+        name.setText("Nombre: "+item.getName());
+        username.setText("UserName: "+item.getUsername());
+        email.setText("Email: "+item.getEmail());
+        phone.setText("Teléfono: "+item.getPhone());
+        website.setText("Sitio web: "+item.getWebsite());
+        btnFav.setText(R.string.menu_favoritos);
     }
 }
