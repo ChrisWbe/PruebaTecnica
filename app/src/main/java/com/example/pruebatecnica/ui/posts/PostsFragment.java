@@ -1,5 +1,6 @@
 package com.example.pruebatecnica.ui.posts;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class PostsFragment extends Fragment {
     private RecyclerAdapter adapter;
     private PostsViewModel postsViewModel;
     private FloatingActionButton fab;
+    private static final int LAUCH_CODE_ACTIVITY_DIALOG = 0;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         postsViewModel = new ViewModelProvider(this).get(PostsViewModel.class);
@@ -79,7 +81,8 @@ public class PostsFragment extends Fragment {
                 try {
                     parametros.putString("item", item.getObject().toString());
                     intent.putExtras(parametros);
-                    startActivity(intent);
+                    startActivityForResult(intent,LAUCH_CODE_ACTIVITY_DIALOG);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -91,6 +94,21 @@ public class PostsFragment extends Fragment {
         });
 
         return root;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        switch (requestCode){
+            case LAUCH_CODE_ACTIVITY_DIALOG:
+                if(resultCode== Activity.RESULT_OK){
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+            default:
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     public void initRecyclerView(){

@@ -52,8 +52,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         );
 
         holder.imgIndicator.setImageResource(
-                item.getId()<=nFirts?R.drawable.ic_circle_indicator:R.drawable.ic_circle_not_indicator
+                !sharedPreferenceManager.obtenerFavShared(String.valueOf(item.getId())) ?
+                        android.R.drawable.checkbox_on_background : item.getId()<=nFirts ?
+                                R.drawable.ic_circle_indicator:R.drawable.ic_circle_not_indicator
         );
+
 
     }
 

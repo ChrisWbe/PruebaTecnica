@@ -3,12 +3,15 @@ package com.example.pruebatecnica;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.pruebatecnica.models.post.PostsModel;
 import com.example.pruebatecnica.repositories.SharedPreferenceManager;
+import com.example.pruebatecnica.ui.posts.PostsFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +55,10 @@ public class DialogActivity extends AppCompatActivity {
                 String itemId = String.valueOf(item.getId());
                 sharedPreferenceManager.saveCV(itemId);
                 btnFav.setEnabled(false);
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
+
             }
         });
 
