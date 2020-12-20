@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import com.example.pruebatecnica.models.post.PostsModel;
@@ -52,6 +53,7 @@ public class DialogActivity extends AppCompatActivity {
         btnFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnFav.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_transition_reverse));
                 String itemId = String.valueOf(item.getId());
                 sharedPreferenceManager.saveCV(itemId);
                 btnFav.setEnabled(false);
@@ -77,6 +79,14 @@ public class DialogActivity extends AppCompatActivity {
         phone = findViewById(R.id.tvPhoneDialog);
         website = findViewById(R.id.tvWebsiteDialog);
         btnFav = findViewById(R.id.btnFavoritos);
+
+        userId.setAnimation(AnimationUtils.loadAnimation(this, R.anim.traslate));
+        id.setAnimation(AnimationUtils.loadAnimation(this, R.anim.traslate));
+        name.setAnimation(AnimationUtils.loadAnimation(this, R.anim.traslate));
+        username.setAnimation(AnimationUtils.loadAnimation(this, R.anim.traslate));
+        email.setAnimation(AnimationUtils.loadAnimation(this, R.anim.traslate));
+        phone.setAnimation(AnimationUtils.loadAnimation(this, R.anim.traslate));
+        website.setAnimation(AnimationUtils.loadAnimation(this, R.anim.traslate));
 
         userId.setText("ID User: "+String.valueOf(item.getUserId()));
         id.setText("ID: "+String.valueOf(item.getId()));

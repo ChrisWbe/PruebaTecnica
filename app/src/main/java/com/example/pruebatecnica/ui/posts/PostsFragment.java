@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -63,6 +64,7 @@ public class PostsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //Actualización de los post
+                fab.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.rotate_clockwise));
                 try {
                     postsViewModel.update(getContext());
                 } catch (JSONException e) {
@@ -75,6 +77,7 @@ public class PostsFragment extends Fragment {
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 postsViewModel.setReadPost(
                         getContext(),
                         postsViewModel.getHomeModel().getValue().get(rvLista.getChildAdapterPosition(v))

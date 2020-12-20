@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pruebatecnica.R;
@@ -38,6 +40,7 @@ public class RecyclerAdapterFav extends RecyclerView.Adapter<RecyclerAdapterFav.
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolderFav holder, int position) {
+        holder.cvFav.setAnimation(AnimationUtils.loadAnimation(c, R.anim.fade_transition));
         PostsModel item = items.get(position);
         holder.tvId.setText(String.valueOf(item.getId()));
         holder.tvTitle.setText(item.getTitle());
@@ -62,6 +65,7 @@ public class RecyclerAdapterFav extends RecyclerView.Adapter<RecyclerAdapterFav.
         private TextView tvUserName;
         private LinearLayout lLayoutBanner;
         private LinearLayout lLayoutFooter;
+        private CardView cvFav;
 
         public RecyclerHolderFav(@NonNull View itemView) {
             super(itemView);
@@ -70,6 +74,7 @@ public class RecyclerAdapterFav extends RecyclerView.Adapter<RecyclerAdapterFav.
             tvUserName = itemView.findViewById(R.id.tvUserNameFav);
             lLayoutBanner = itemView.findViewById(R.id.lLayoutBanner);
             lLayoutFooter = itemView.findViewById(R.id.lLayoutFooter);
+            cvFav = itemView.findViewById(R.id.cvItemListFav);
         }
     }
 }

@@ -5,10 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pruebatecnica.R;
@@ -40,6 +43,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
+        holder.cvItemList.setAnimation(AnimationUtils.loadAnimation(c,R.anim.fade_transition));
+
         PostsModel item = items.get(position);
         String id = String.valueOf(item.getId());
         holder.tvId.setText(String.valueOf(item.getId()));
@@ -71,6 +76,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
     @Override
     public void onClick(View v) {
+        //Toast.makeText(c, String.valueOf(v.getId()), Toast.LENGTH_LONG).show();
+        //v.setAnimation(AnimationUtils.loadAnimation(c, R.anim.traslate));
         if(listener!=null){
             listener.onClick(v);
         }
@@ -83,6 +90,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         private TextView tvBody;
         private ImageView imgStar;
         private ImageView imgIndicator;
+        private CardView cvItemList;
 
 
 
@@ -94,6 +102,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
             tvBody = itemView.findViewById(R.id.tvBody);
             imgStar = itemView.findViewById(R.id.imgStar);
             imgIndicator = itemView.findViewById(R.id.imgIndicator);
+            cvItemList = itemView.findViewById(R.id.cvItemList);
 
         }
     }
