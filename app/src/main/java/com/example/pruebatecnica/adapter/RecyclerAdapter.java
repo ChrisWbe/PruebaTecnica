@@ -41,6 +41,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
     @Override
     public void onBindViewHolder(@NonNull RecyclerHolder holder, int position) {
         PostsModel item = items.get(position);
+        String id = String.valueOf(item.getId());
         holder.tvId.setText(String.valueOf(item.getId()));
         holder.tvTitle.setText(item.getTitle());
         holder.tvBody.setText(item.getBody());
@@ -48,12 +49,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
 
         sharedPreferenceManager = new SharedPreferenceManager(c);
         holder.imgStar.setImageResource(
-                sharedPreferenceManager.obtenerFavShared(String.valueOf(item.getId())) ? android.R.drawable.star_big_off : android.R.drawable.star_big_on
+                sharedPreferenceManager.obtenerFavShared(id) ? android.R.drawable.star_big_off : android.R.drawable.star_big_on
         );
 
         holder.imgIndicator.setImageResource(
-                !sharedPreferenceManager.obtenerFavShared(String.valueOf(item.getId())) ?
-                        android.R.drawable.checkbox_on_background : item.getId()<=nFirts ?
+                !sharedPreferenceManager.obtenerFavShared(id) ?
+                        android.R.drawable.checkbox_on_background : !sharedPreferenceManager.obtenerReadShared(id) ?
+                            android.R.drawable.checkbox_on_background: item.getId()<=nFirts ?
                                 R.drawable.ic_circle_indicator:R.drawable.ic_circle_not_indicator
         );
 

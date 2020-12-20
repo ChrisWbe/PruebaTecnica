@@ -38,14 +38,22 @@ public class PostsViewModel extends ViewModel {
 
     public void update(Context c) throws JSONException {
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(c);
-        sharedPreferenceManager.deleteFilePre();
+        sharedPreferenceManager.deleteFileFavPre();
+        sharedPreferenceManager.deleteFileReadPre();
         mPostModel.getValue().clear();
         mPostModel = mRepo.updatePostsModels();
     }
 
-    public void deletePreFav(Context c){
+    public void deletePre(Context c){
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(c);
-        sharedPreferenceManager.deleteFilePre();
+        sharedPreferenceManager.deleteFileFavPre();
+        sharedPreferenceManager.deleteFileReadPre();
+    }
+
+
+    public void setReadPost(Context c, PostsModel item){
+        SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(c);
+        sharedPreferenceManager.saveRead(String.valueOf(item.getId()));
     }
 
     public LiveData<List<PostsModel>> getHomeModel(){

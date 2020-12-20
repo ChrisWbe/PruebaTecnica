@@ -75,6 +75,10 @@ public class PostsFragment extends Fragment {
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                postsViewModel.setReadPost(
+                        getContext(),
+                        postsViewModel.getHomeModel().getValue().get(rvLista.getChildAdapterPosition(v))
+                );
                 PostsModel item = postsViewModel.getHomeModel().getValue().get(rvLista.getChildAdapterPosition(v));
                 Intent intent = new Intent(getContext(), DialogActivity.class);
                 Bundle parametros = new Bundle();
@@ -131,7 +135,7 @@ public class PostsFragment extends Fragment {
         switch (item.getItemId()){
             case R.id.action_delete:
                 Toast.makeText(getContext(), "Borrado", Toast.LENGTH_LONG).show();
-                postsViewModel.deletePreFav(getContext());
+                postsViewModel.deletePre(getContext());
                 postsViewModel.getHomeModel().getValue().clear();
                 adapter.notifyDataSetChanged();
                 return true;

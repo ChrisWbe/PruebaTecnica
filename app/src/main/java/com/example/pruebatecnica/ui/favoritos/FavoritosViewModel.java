@@ -27,7 +27,7 @@ public class FavoritosViewModel extends ViewModel {
     }
     public void deleteFav(Context c){
         SharedPreferenceManager sharedPreferenceManager = new SharedPreferenceManager(c);
-        sharedPreferenceManager.deleteFilePre();
+        sharedPreferenceManager.deleteFileFavPre();
         mPostModel.getValue().clear();
     }
 
